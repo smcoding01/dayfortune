@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>오늘의 번호</title>
+        <meta charset="utf-8">
+        <meta name="description" content="오늘의 번호, 무료 로또 번호 생성기입니다.">
+        <meta property="og:title" content="오늘의 번호"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://dev-guardy.github.io/lotto/"/>
+        <meta property="og:description" content="오늘의 번호, 무료 로또 번호 생성기입니다. 모두 대박나세요!"/>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <script src="jquery-3.1.1.js"></script>
+        <link rel="stylesheet" type="text/css" href="select.css">
+        <script>
+        function drawcolor(){
+            var number = document.getElementsByClassName("lottocircle");
+            for (var i = 0 ; i < number.length ; i++) {
+                if(parseInt(number[i].textContent)>=40){
+                    number[i].style="background-color:#000";
+                }else if(parseInt(number[i].textContent)>=30){
+                    number[i].style="background-color:#ea4c89";
+                }else if(parseInt(number[i].textContent)>=20){
+                    number[i].style="background-color:#0057ff";
+                }else if(parseInt(number[i].textContent)>=10){
+                    number[i].style="background-color:#32c766"; 
+                }   
+                else{
+                    number[i].style="background-color:#f48024";  
+                } 
+            }
+        }
+        function randomlottoNumber () {
+            var lotto = [];
+            var cnt = 0;
+            var flag = true;
+            while (cnt < 6) {
+                var number = 0; 
+                number = parseInt(Math.random() * 45) + 1; 
+                for (var i = 0; i < cnt; i++) { 
+                    if (lotto[i] == number) {
+                        flag = false;
+                    }
+                }
+                if (flag==true) { 
+                    lotto[cnt] = number; 
+                    cnt++;
+                }
+                flag = true; 
+            }
+            sort_lotto = lotto.sort(function (a,b){ return a-b; });
+            return sort_lotto;
+        }
+        function milli() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                resolve('resolved');
+                }, 500);
+            });
+        }
+
+        async function adddiv(j){
+            for(i=0;i<j;i++)
+            {   
+                await milli();
+                lottoarray = randomlottoNumber();
+                $('#div').append($('<div class="numberdiv"><div class="top-div"><div class="top-div-name">'+(i+1)+'번째 오늘의번호(자동)</div></div><div class="numberset"><div class="lottocircle"><p class="value">'+lottoarray[0]+'</p></div><div class="lottocircle"><p class="value">'+lottoarray[1]+'</p></div><div class="lottocircle"><p class="value">'+lottoarray[2]+'</p></div><div class="lottocircle"><p class="value">'+lottoarray[3]+'</p></div><div class="lottocircle"><p class="value">'+lottoarray[4]+'</p></div><div class="lottocircle"><p class="value">'+lottoarray[5]+'</p></div></div></div>'));
+                drawcolor();
+            }
+        }
+         $(document).ready(function(){
+            
+                $('#option1').click(function(){ 
+                    $("#app-cover").hide();
+                    adddiv(1);
+                });
+                $('#option2').click(function(){ 
+                    $("#app-cover").hide(); 
+                    adddiv(2);
+                });
+                $('#option4').click(function(){ 
+                    $("#app-cover").hide(); 
+                    adddiv(4);
+                });
+                $('#option5').click(function(){ 
+                    $("#app-cover").hide(); 
+                    adddiv(5);
+                });
+                $('#option10').click(function(){ 
+                    $("#app-cover").hide(); 
+                    adddiv(10);
+                    
+                });
+        });
+        </script>
+    </head>
+<body>
+    <nav class="navigator">
+        <div class="nav_area">
+            <a class="icon" href="/day-fortune/auto.html">
+                <i class="text">오늘의 번호</i> 
+            </a>
+            <div class="nav_group">
+                <a class="nav_link" href="/day-fortune/auto.html">자동</a>
+                <a class="nav_link" href="/day-fortune/semiauto.html">반자동</a>
+				<a class="nav_link" href="/day-fortune/qr.html">당첨확인(QR code)</a>
+            </div>
+        </div>
+    </nav>
+    <div class="main" id="main">
+        <div class="select">
+            <div class="title1">자동 번호 생성</div>
+            <form id="app-cover">
+                <div id="select-box">
+                        <input type="checkbox" id="options-view-button">
+                        <div id="select-button" class="brd">
+                                <div id="selected-value">
+                                    <span>로또 번호 받을 개수</span>
+                                </div>
+                        </div>
+                        <div id="options">
+                                <div class="option" id="option1">
+                                        <input class="s-c top" type="radio" name="platform" value="five">
+                                        <input class="s-c bottom" type="radio" name="platform" value="five">
+                                        <span class="label">1개</span>
+                                        <span class="opt-val">1</span>
+                                </div>
+                                <div class="option" id="option2">
+                                        <input class="s-c top" type="radio" name="platform" value="ten">
+                                        <input class="s-c bottom" type="radio" name="platform" value="ten">
+                                        <span class="label">2개</span>
+                                        <span class="opt-val">2</span>
+                                </div>
+                                <div class="option" id="option5">
+                                        <input class="s-c top" type="radio" name="platform" value="fifteen">
+                                        <input class="s-c bottom" type="radio" name="platform" value="fifteen">
+                                        <span class="label">5개</span>
+                                        <span class="opt-val">5</span>
+                                </div>
+                                <div class="option" id="option10">
+                                        <input class="s-c top" type="radio" name="platform" value="twenty">
+                                        <input class="s-c bottom" type="radio" name="platform" value="twenty">
+                                        <span class="label">10개</span>
+                                        <span class="opt-val">10</span>
+                                </div>
+                                <div id="option-bg"></div>
+                        </div>
+                </div>
+            </form>
+            <div class="div" id=div>
+            </div>
+			 <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_inline_share_toolbox"></div>
+    </div>
+    </div>
+   
+    </div>
+	<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fc88ba5d058359b"></script>
+</body>
+</html>
