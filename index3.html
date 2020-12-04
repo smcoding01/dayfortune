@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>행운 번호</title>
+        <meta charset="utf-8">
+        <meta name="description" content="행운 번호, 무료 로또 번호 생성기입니다.">
+        <meta property="og:title" content="행운 번호"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://dev-guardy.github.io/lotto/"/>
+        <meta property="og:description" content="행운 번호, 무료 로또 번호 생성기입니다. 모두 대박나세요!"/>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <script src="jquery-3.1.1.js"></script>
+        <link rel="stylesheet" type="text/css" href="select.css">
+        <script>
+            var except_number = [];
+        function drawcolor(){
+            var number = document.getElementsByClassName("lottocircle");
+            for (var i = 0 ; i < number.length ; i++) {
+                if(parseInt(number[i].textContent)>=40){
+                    number[i].style="background-color:#000";
+                }else if(parseInt(number[i].textContent)>=30){
+                    number[i].style="background-color:#ea4c89";
+                }else if(parseInt(number[i].textContent)>=20){
+                    number[i].style="background-color:#0057ff";
+                }else if(parseInt(number[i].textContent)>=10){
+                    number[i].style="background-color:#32c766"; 
+                }   
+                else{
+                    number[i].style="background-color:#f48024";  
+                } 
+            }
+        }
+        function randomlottoNumber () {
+            var lotto = [];
+            var cnt = 0;
+            var flag = true;
+            while (cnt < 6) {
+                var number = 0; 
+                number = parseInt(Math.random() * 45) + 1; 
+                for (var i = 0; i < cnt; i++) { 
+                    if (lotto[i] == number) {
+                        flag = false;   
+                    }
+                }
+                
+                if (flag==true) { 
+                    if(except_number.indexOf(number)<0){
+                        lotto[cnt] = number; 
+                        cnt++;
+                    }
+                }
+                flag = true; 
+            }
+            sort_lotto = lotto.sort(function (a,b){ return a-b; });
+            return sort_lotto;
+        }
+        function check_count(j){
+            if(except_number.indexOf(j)<0){
+                except_number.push(j);
+            }
+            else{
+                except_number.remove(j);
+            }
+        }
+        function milli() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                resolve('resolved');
+                }, 500);
+            });
+        }
+
+        async function adddiv(j){
+            for(i=0;i<j;i++)
+            {   
+                await milli();
+                lottoarray = randomlottoNumber();
+                $('#div').append($('<div class="numberdiv"><div class="top-div"><div class="top-div-name">'+(i+1)+'번째 오늘의번호(반자동)</div></div><div class="numberset"><div class="lottocircle"><p class="value">'+lottoarray[0]+'</p></div><div class="lottocircle"><p class="value">'+lottoarray[1]+'</p></div><div class="lottocircle"><p class="value">'+lottoarray[2]+'</p></div><div class="lottocircle"><p class="value">'+lottoarray[3]+'</p></div><div class="lottocircle"><p class="value">'+lottoarray[4]+'</p></div><div class="lottocircle"><p class="value">'+lottoarray[5]+'</p></div></div></div>'));
+                drawcolor();
+            }
+        }
+         $(document).ready(function(){
+                var except_number;
+                $('#option1').click(function(){ 
+                    $("#checkselect").hide();
+                    adddiv(1);
+                });
+                $('#option5').click(function(){ 
+                    $("#checkselect").hide(); 
+                    adddiv(5);
+                });
+                $('#option10').click(function(){ 
+                    $("#checkselect").hide();
+                    adddiv(10);
+                });
+                $('#option15').click(function(){ 
+                    $("#checkselect").hide();
+                    adddiv(15);
+                });
+                $('#option20').click(function(){ 
+                    $("#checkselect").hide(); 
+                    adddiv(20);
+                    
+                });
+        });
+        </script>
+    </head>
+<body>
+    <nav class="navigator">
+        <div class="nav_area">
+            <a class="icon" href="/day-fortune/">
+                <i class="text">행운 번호</i> 
+            </a>
+            <div class="nav_group">
+                <a class="nav_link" href="/day-fortune/index2.html">자동</a>
+                <a class="nav_link" href="/day-fortune/index3.html">반자동</a>
+				<a class="nav_link" href="/day-fortune/index4.html">당첨확인(QR code)</a>
+            </div>
+        </div>
+    </nav>
+    <div class="main" id="main">
+        <div class="checkselect"  id="checkselect">
+            <div class="title2">반자동 번호 생성(제외할 번호 체크)</div>
+            <table width="250" class="checkbox">
+                <tbody>
+                    <tr>
+                        <td width="60"><input type="checkbox" onclick="check_count(1)">1</td>
+                        <td width="60"><input type="checkbox" onclick="check_count(2)">2</td>
+                        <td width="60"><input type="checkbox" onclick="check_count(3)">3</td>
+                        <td width="60"><input type="checkbox" onclick="check_count(4)">4</td>
+                        <td width="60"><input type="checkbox" onclick="check_count(5)">5</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" onclick="check_count(6)">6 </td>
+                        <td><input type="checkbox" onclick="check_count(7)">7</td>
+                        <td><input type="checkbox" onclick="check_count(8)">8 </td>
+                        <td><input type="checkbox" onclick="check_count(9)">9 </td>
+                        <td><input type="checkbox" onclick="check_count(10)">10</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" onclick="check_count(11)">11</td>
+                        <td><input type="checkbox" onclick="check_count(12)">12</td>
+                        <td><input type="checkbox" onclick="check_count(13)">13</td>
+                        <td><input type="checkbox" onclick="check_count(14)">14</td>
+                        <td><input type="checkbox" onclick="check_count(15)">15</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" onclick="check_count(16)">16</td>
+                        <td><input type="checkbox" onclick="check_count(17)">17</td>
+                        <td><input type="checkbox" onclick="check_count(18)">18</td>
+                        <td><input type="checkbox" onclick="check_count(19)">19</td>
+                        <td><input type="checkbox" onclick="check_count(20)">20</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" onclick="check_count(21)">21</td>
+                        <td><input type="checkbox" onclick="check_count(22)">22</td>
+                        <td><input type="checkbox" onclick="check_count(23)">23</td>
+                        <td><input type="checkbox" onclick="check_count(24)">24</td>
+                        <td><input type="checkbox" onclick="check_count(25)">25</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" onclick="check_count(26)">26</td>
+                        <td><input type="checkbox" onclick="check_count(27)">27</td>
+                        <td><input type="checkbox" onclick="check_count(28)">28</td>
+                        <td><input type="checkbox" onclick="check_count(29)">29</td>
+                        <td><input type="checkbox" onclick="check_count(30)">30</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" onclick="check_count(31)">31</td>
+                        <td><input type="checkbox" onclick="check_count(32)">32</td>
+                        <td><input type="checkbox" onclick="check_count(33)">33</td>
+                        <td><input type="checkbox" onclick="check_count(34)">34</td>
+                        <td><input type="checkbox" onclick="check_count(35)">35</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" onclick="check_count(36)">36</td>
+                        <td><input type="checkbox" onclick="check_count(37)">37</td>
+                        <td><input type="checkbox" onclick="check_count(38)">38</td>
+                        <td><input type="checkbox" onclick="check_count(39)">39</td>
+                        <td><input type="checkbox" onclick="check_count(40)">40</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" onclick="check_count(41)">41</td>
+                        <td><input type="checkbox" onclick="check_count(42)">42</td>
+                        <td><input type="checkbox" onclick="check_count(43)">43</td>
+                        <td><input type="checkbox" onclick="check_count(44)">44</td>
+                        <td><input type="checkbox" onclick="check_count(45)">45</td>
+                    </tr>
+                </tbody>
+            </table>
+            <form id="app-cover">
+                <div id="select-box">
+                        <input type="checkbox" id="options-view-button">
+                        <div id="select-button" class="brd">
+                                <div id="selected-value">
+                                    <span>로또 번호 받을 개수</span>
+                                </div>
+                        </div>
+                        <div id="options">
+                                <div class="option" id="option1">
+                                        <input class="s-c top" type="radio" name="platform" value="five">
+                                        <input class="s-c bottom" type="radio" name="platform" value="five">
+                                        <span class="label">1개</span>
+                                        <span class="opt-val">1</span>
+                                </div>
+                                <div class="option" id="option2">
+                                        <input class="s-c top" type="radio" name="platform" value="ten">
+                                        <input class="s-c bottom" type="radio" name="platform" value="ten">
+                                        <span class="label">2개</span>
+                                        <span class="opt-val">2</span>
+                                </div>
+                                <div class="option" id="option5">
+                                        <input class="s-c top" type="radio" name="platform" value="fifteen">
+                                        <input class="s-c bottom" type="radio" name="platform" value="fifteen">
+                                        <span class="label">5개</span>
+                                        <span class="opt-val">5</span>
+                                </div>
+                                <div class="option" id="option10">
+                                        <input class="s-c top" type="radio" name="platform" value="twenty">
+                                        <input class="s-c bottom" type="radio" name="platform" value="twenty">
+                                        <span class="label">10개</span>
+                                        <span class="opt-val">10</span>
+                                </div>
+                                <div id="option-bg"></div>
+                        </div>
+                </div>
+            </form>
+        </div>
+        <div class="div" id=div>
+        </div>
+    </div>
+	
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_inline_share_toolbox_bnf6"></div>
+            
+    
+    </div>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fc88ba5d058359b"></script>
+
+</body>
+</html>

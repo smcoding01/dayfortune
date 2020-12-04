@@ -53,7 +53,10 @@ body
     min-height: 350px;
     width: auto !important;
 }
-
+p{
+    margin: 0;
+    color:white;
+}
 .main{
     height: auto !important;
 }

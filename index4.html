@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>행운 번호</title>
+        <meta charset="utf-8">
+        <meta name="description" content="오늘의 번호, 무료 로또 번호 생성기입니다.">
+        <meta property="og:title" content="오늘의 번호"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://dev-guardy.github.io/lotto/"/>
+        <meta property="og:description" content="오늘의 번호, 무료 로또 번호 생성기입니다. 모두 대박나세요!"/>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <script src="jquery-3.1.1.js"></script>
+        <link rel="stylesheet" type="text/css" href="select.css">
+        <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
+<body>
+    <nav class="navigator">
+        <div class="nav_area">
+          <a class="icon" href="/day-fortune/index2.html">
+                <i class="text">행운 번호</i> 
+            </a>
+            <div class="nav_group">
+                <a class="nav_link" href="/day-fortune/index2.html">자동</a>
+                <a class="nav_link" href="/day-fortune/index3.html">반자동</a>
+				<a class="nav_link" href="/day-fortune/index4.html">당첨확인(QR code)</a>
+            </div>
+        </div>
+    </nav>
+    <div class="main" id="main">
+ <div id="container">
+      <h1>QR Code Scanner</h1>
+
+      <a id="btn-scan-qr">
+        <img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg">
+      <a/>
+
+      <canvas hidden="" id="qr-canvas"></canvas>
+
+      <div id="qr-result" hidden="">
+        <b>Data:</b> <span id="outputData"></span>
+      </div>
+    </div>
+
+    <script src="./src/qrCodeScanner.js"></script>
+    </div>
+    </div>
+   
+    </div>
+	<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fc88ba5d058359b"></script>
+	
+</body>
+</html>
